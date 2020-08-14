@@ -1,30 +1,42 @@
 import { Inject, Injectable }            from '@angular/core';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
+import { GlobalsService } from './globals.service';
+
 @Injectable()
 export class AuthService {
 
-  private _isLoggedIn:     boolean | Object = false;
-  private _checkedStorage: boolean          = false;
+  private _isLoggedIn:     boolean = false;
+  private _checkedStorage: boolean = false;
 
   redirectUrl: string;
 
 
 
-  constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) { }
+  constructor(
+    @Inject(LOCAL_STORAGE)
+    private storage: StorageService,
+    private globals: GlobalsService
+  ) { }
 
 
 
-  private async _checkStorageIsLoggedIn() {
-    const isLoggedIn = await this.storage.get('isLoggedIn');
+  private async _checkStorageLoggedUser() {
+
+    const loggedUser = await this.storage.get('loggedUser');
+
     this._checkedStorage = true;
-    if (isLoggedIn) this._isLoggedIn = isLoggedIn;
+
+    if (loggedUser) {
+      this._isLoggedIn = true;
+      this.globals.setLoggedUserData(loggedUser);
+    }
   }
 
-  async getIsLoggedIn() {
+  async getIsLoggedIn () {
 
     if (!this._checkedStorage) {
-      await this._checkStorageIsLoggedIn();
+      await this._checkStorageLoggedUser();
     }
 
     return this._isLoggedIn;
@@ -33,23 +45,23 @@ export class AuthService {
   authLogin(email: string, pswd: string) {
 
     if ((email === "raniere@email.com") && (pswd === "123456")) {
-      this._isLoggedIn = {email};
-      this.storage.set('isLoggedIn', {email});
+
+      this._isLoggedIn = true;
+      this.globals.setLoggedUserData({email});
+      this.storage.set('loggedUser', {email});
+
       return true;
     }
 
     return false;
   }
 
-  //facebookLogin(): boolean {
-  //  this._isLoggedIn = true;
-  //  this.storage.set('isLoggedIn', true);
-  //  return true;
-  //}
+  logout() {
 
-  logout(): boolean {
     this._isLoggedIn = false;
-    this.storage.remove('isLoggedIn');
+    this.globals.setLoggedUserData(false);
+    this.storage.remove('loggedUser');
+
     return true;
   }
 }

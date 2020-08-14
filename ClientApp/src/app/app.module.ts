@@ -5,7 +5,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Routes, RouterModule }                from '@angular/router';
 import { StorageServiceModule }                from 'ngx-webstorage-service';
 
-import { AuthService } from './services/auth.service';
+import { GlobalsService } from './services/globals.service';
+import { AuthService }    from './services/auth.service';
 
 import { AppComponent } from './app.component';
 
@@ -42,7 +43,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     StorageServiceModule
   ],
-  providers: [AuthService],
+  providers: [GlobalsService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
