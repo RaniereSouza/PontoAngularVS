@@ -34,8 +34,14 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/calculator']">Calculator</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
+          <li *ngIf="!isLoggedIn" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item">
+            <span class="nav-link text-dark">Bem-vindo(a), {{isLoggedIn.email}}!</span>
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item">
+            <a class="nav-link text-dark" (click)="handleLogout()">Sair</a>
           </li>
         </ul>
       </div>

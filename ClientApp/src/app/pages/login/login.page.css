@@ -1,0 +1,25 @@
+h1 {
+  text-align: center;
+}
+
+form {
+  float: none;
+  margin: 0 auto;
+  width: 25vw;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+
+  form input {
+    width: 100%;
+  }
+
+    form input:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+  form .btn {
+    font-variant: small-caps;
+    letter-spacing: 1.5px;
+  }

@@ -1,8 +1,8 @@
 <div>
   <h1>Login</h1>
-  <form action="">
-    <input type="email" name="email" placeholder="E-mail" />
-    <input type="password" name="pswd" placeholder="Password" />
+  <form (submit)="handleLogin()" >
+    <input type="email" name="email" placeholder="E-mail" class="form-control" [(ngModel)]="email" />
+    <input type="password" name="pswd" placeholder="Password" class="form-control" [(ngModel)]="pswd" />
     <input type="submit" class="btn btn-primary" />
   </form>
 </div>
