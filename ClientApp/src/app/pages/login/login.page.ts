@@ -1,5 +1,5 @@
-import { Component }  from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router }    from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -22,15 +22,15 @@ export class LoginPage {
 
     if (email && pswd) {
       if (this.auth.authLogin(email, pswd)) {
-        alert("Bem vindo! Login realizado com sucesso.");
+        alert('Bem vindo! Login realizado com sucesso.');
         this.router.navigate(['/']);
       }
       else {
-        alert("Email ou senha incorretos!");
+        alert('Email ou senha incorretos!');
       }
     }
     else {
-      alert("Preencha todos os campos!");
+      alert('Preencha todos os campos!');
     }
   }
 }

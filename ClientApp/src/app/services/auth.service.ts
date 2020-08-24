@@ -6,8 +6,8 @@ import { GlobalsService } from './globals.service';
 @Injectable()
 export class AuthService {
 
-  private _isLoggedIn:     boolean = false;
-  private _checkedStorage: boolean = false;
+  private _isLoggedIn     = false;
+  private _checkedStorage = false;
 
   redirectUrl: string;
 
@@ -44,7 +44,7 @@ export class AuthService {
 
   authLogin(email: string, pswd: string) {
 
-    if ((email === "raniere@email.com") && (pswd === "123456")) {
+    if ((email === 'raniere@email.com') && (pswd === '123456')) {
 
       this._isLoggedIn = true;
       this.globals.setLoggedUserData({email});

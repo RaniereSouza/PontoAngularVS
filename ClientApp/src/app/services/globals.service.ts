@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+
 import { Subject } from 'rxjs';
 
-export type UserData = {
+export interface UserData {
   email: string;
 }
 
@@ -17,7 +18,6 @@ export class GlobalsService {
   getLoggedUserData() {
     return this._loggedUserData.asObservable();
   }
-
   setLoggedUserData(value: boolean | UserData) {
     this._loggedUserData.next(value);
   }
